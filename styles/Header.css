@@ -1,0 +1,161 @@
+.site-header {
+  background: var(--background-color);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+header h3{
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin: 0;
+}
+
+/* Nav Styles */
+.main-nav ul {
+  display: flex;
+  gap: 30px;
+}
+
+.main-nav a {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--primary-color);
+  position: relative;
+}
+
+.main-nav a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--secondary-color);
+  transition: width 0.3s ease;
+}
+
+.main-nav a:hover::after {
+  width: 100%;
+}
+
+/* Toggle Button */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.menu-toggle .bar {
+  width: 25px;
+  height: 3px;
+  background-color: var(--primary-color);
+  transition: all 0.3s ease;
+}
+
+.menu-toggle.open .bar:nth-child(1),
+.menu-toggle.open .bar:nth-child(2),
+.menu-toggle.open .bar:nth-child(3) {
+  opacity: 0;
+}
+
+.close-nav {
+  display: none;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+    z-index: 1101;
+  }
+
+  .main-nav {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 35vw;
+    height: 100vh;
+    background: #fff;
+    border-left: 1px solid var(--border-gray);
+    box-shadow: -2px 0 16px rgba(0, 0, 0, 0.08);
+    padding: 40px 24px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    transition: right 0.4s cubic-bezier(0.77, 0, 0.18, 1);
+    z-index: 1201;
+  }
+
+  .main-nav.nav-open {
+    right: 0;
+    box-shadow: -2px 0 24px rgba(0, 0, 0, 0.15);
+  }
+
+  .main-nav ul {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .main-nav li {
+    margin: 0;
+  }
+
+  .main-nav a {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    padding: 10px 0;
+    border-radius: 8px;
+    transition: background 0.2s, color 0.2s;
+    font-weight: 500;
+  }
+
+  .main-nav a:hover,
+  .main-nav a:focus {
+    background: var(--soft-gray);
+    color: var(--secondary-color);
+  }
+
+  /* Overlay covers everything, slides in with nav */
+  .nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.25);
+    z-index: 1200;
+    width: 65vw;
+    opacity: 0;
+    left: -100vw;
+    pointer-events: none;
+    transition: opacity 0.4s cubic-bezier(0.77, 0, 0.18, 1), left 0.4s cubic-bezier(0.77, 0, 0.18, 1);
+  }
+  .nav-overlay.active {
+    left: 0;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Close button inside nav */
+  .close-nav {
+    display: block;
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    z-index: 2;
+    transition: color 0.2s;
+  }
+  .close-nav:hover,
+  .close-nav:focus {
+    color: var(--secondary-color);
+  }
+}
